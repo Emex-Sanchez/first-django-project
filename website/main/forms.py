@@ -5,7 +5,7 @@ from .models import Post
 
 
 class RegisterForm(UserCreationForm):
-    email = forms.EmailField()
+    email = forms.EmailField(required=True)
 
     class Meta:
         model = User
@@ -13,6 +13,14 @@ class RegisterForm(UserCreationForm):
 
 
 class PostForm(forms.ModelForm):
-    class Meta:
+     class Meta:
         model = Post
         fields = ["title", "description"]
+
+
+class PostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ['title', 'description']
+
+

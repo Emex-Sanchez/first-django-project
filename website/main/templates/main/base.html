@@ -6,7 +6,7 @@
       integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
       crossorigin="anonymous"
     />
-    <title>{% block title %}Tim's Site{% endblock %}</title>
+    <title>{% block title %}Emmanuel's site{% endblock %}</title>
   </head>
 
   <body>
@@ -27,7 +27,7 @@
             {% if user.is_authenticated %}
             <span class="navbar-text"> Logged in as: {{user.username}} | </span>
             <li class="nav-item">
-              <a class="nav-link" href="/logout">Logout</a>
+              <a class="nav-link" href="{% url 'logout' %}">Logout</a>
             </li>
             {% else %}
             <li class="nav-item">

@@ -1,6 +1,5 @@
-{% extends "main/base.html" %} {% block title %} Login Here {% endblock %} 
-{%load crispy_forms_tags %} 
-{% block content %}
+{% extends "main/base.html" %} {% block title %} Login Here {% endblock %}
+{%load crispy_forms_tags %} {% block content %}
 <form method="post" class="from-group">
   {% csrf_token %} {{form|crispy}}
   <p>Don't have an accoount? Create one <a href="/sign-up">here</a></p>
