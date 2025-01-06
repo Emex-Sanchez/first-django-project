@@ -1,8 +1,9 @@
-{% extends 'main/base.html' %}
- {% block content %}
-<h2>Update Post</h2>
-<form method="post">
-  {% csrf_token %} {{ form.as_p }}
+{% extends 'main/base.html' %} 
+{% block title %}Edit post{% endblock %} 
+{% load crispy_forms_tags %} 
+{% block content %}
+<form method="post" class="form-group">
+  {% csrf_token %} {{ form|crispy }} 
   <button type="submit" class="btn btn-success">Save Changes</button>
 </form>
 <a href="{% url 'home' %}" class="btn btn-secondary">Cancel</a>

@@ -1,5 +1,6 @@
 {% extends 'main/base.html' %}
-{% block title %}Make A Post{% endblock %} {% load crispy_forms_tags %} 
+{% block title %}Make A Post{% endblock %} 
+{% load crispy_forms_tags %} 
 {% block content %}
 <form method="POST" class="form-group">
   {% csrf_token %} {{ form|crispy }}

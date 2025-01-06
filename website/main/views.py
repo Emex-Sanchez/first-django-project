@@ -7,22 +7,33 @@ from django.contrib.auth.models import User, Permission, Group
 from django.contrib import messages
 from .models import Post
 from django.views.generic import UpdateView
+import requests
+API_KEY= 'c6280cefba8c4eccaff85ab0426c8cc1'
 
-'''
-user = authenticate(request, username=username, password=password)
-if user is not None:
-    login(request, user)
-    # Redirect to a success page.
-    ...
-else:
-    # Return an 'invalid login' error message.
-'''
 
 
 def get_user_permissions(user):
     if user.is_superuser:
         return Permission.objects.all()
     return user.user_permissions.all() | Permission.objects.filter(group__user=user)
+
+
+# API integration ====================================
+
+def crib(request):
+    url = f'https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey={API_KEY}'
+    response = request.get(url)
+    data = response.json()
+    print(data)
+
+    context = {
+        'data' : data
+    }
+
+    return render(request, 'main/home.html', context)
+
+
+
 
 
 @login_required(login_url='/login')
@@ -42,7 +53,9 @@ def home(request):
                 group.user_set.remove(user)
                 messages.success(request, "User banned!")
 
-    return render(request, "main/home.html", {"posts": Post.objects.all(), "request": request})
+    return render(request, "main/home.html",  {"posts": Post.objects.all(),  "request": request})
+ 
+    
 @login_required
 def update_post(request, pk):
     post = get_object_or_404(Post, pk=pk)
@@ -100,3 +113,7 @@ def create_post(request):
 def custom_logout_view(request):
     logout(request)  
     return redirect('/login')  
+
+
+# News Api=======================================================
+
