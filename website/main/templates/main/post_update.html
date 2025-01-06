@@ -1,10 +1,24 @@
-{% extends 'main/base.html' %} 
-{% block title %}Edit post{% endblock %} 
-{% load crispy_forms_tags %} 
+{% extends 'main/base.html' %}
+{% block title %}Edit Post{% endblock %}
+{% load crispy_forms_tags %}
 {% block content %}
-<form method="post" class="form-group">
-  {% csrf_token %} {{ form|crispy }} 
-  <button type="submit" class="btn btn-success">Save Changes</button>
-</form>
-<a href="{% url 'home' %}" class="btn btn-secondary">Cancel</a>
+<div class="max-w-3xl mx-auto mt-10 bg-white p-8 shadow-md rounded-lg">
+  <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Edit Your Post</h2>
+  <form method="post" class="space-y-6">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <div class="flex space-x-4">
+      <button 
+        type="submit" 
+        class="bg-green-600 text-white py-2 px-6 rounded hover:bg-green-700 transition">
+        Save Changes
+      </button>
+      <a 
+        href="{% url 'home' %}" 
+        class="bg-gray-500 text-white py-2 px-6 rounded hover:bg-gray-600 transition">
+        Cancel
+      </a>
+    </div>
+  </form>
+</div>
 {% endblock %}

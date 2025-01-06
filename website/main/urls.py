@@ -10,5 +10,6 @@ urlpatterns = [
     path('create-post', views.create_post, name='create-post'),
     path('logout/', custom_logout_view, name='logout'),
     path('post/<int:pk>/edit/', update_post, name='post_update'),
-    path('', views.crib, name='crib')
+    path('news', views.news, name='news')
+
 ]

@@ -1,9 +1,23 @@
 {% extends 'main/base.html' %}
-{% block title %}Make A Post{% endblock %} 
-{% load crispy_forms_tags %} 
+{% block title %}Make A Post{% endblock %}
+{% load crispy_forms_tags %}
 {% block content %}
-<form method="POST" class="form-group">
-  {% csrf_token %} {{ form|crispy }}
-  <button type="submit" class="btn btn-success">Post</button>
-</form>
+<div class="max-w-md mx-auto bg-white shadow-md rounded px-8 py-6 mt-8">
+  <h1 class="text-2xl font-bold mb-4">Create a Post</h1>
+  <form method="POST" class="space-y-4">
+    {% csrf_token %}
+    <!-- Render the form fields -->
+    <div class="space-y-4">
+      {{ form|crispy }}
+    </div>
+    <!-- Submit Button -->
+    <div>
+      <button 
+        type="submit" 
+        class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
+        Post
+      </button>
+    </div>
+  </form>
+</div>
 {% endblock %}

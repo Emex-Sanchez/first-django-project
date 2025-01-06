@@ -8,7 +8,7 @@ from django.contrib import messages
 from .models import Post
 from django.views.generic import UpdateView
 import requests
-API_KEY= 'c6280cefba8c4eccaff85ab0426c8cc1'
+API_KEY = 'c6280cefba8c4eccaff85ab0426c8cc1'
 
 
 
@@ -20,17 +20,18 @@ def get_user_permissions(user):
 
 # API integration ====================================
 
-def crib(request):
+def news(request):
     url = f'https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey={API_KEY}'
-    response = request.get(url)
+    response = requests.get(url)
     data = response.json()
-    print(data)
+
+    articles = data['articles']
 
     context = {
-        'data' : data
+        'articles' : articles
     }
 
-    return render(request, 'main/home.html', context)
+    return render(request, "main/news.html", context)
 
 
 
@@ -51,7 +52,9 @@ def home(request):
             else:
                 group = Group.objects.get(name='default')
                 group.user_set.remove(user)
-                messages.success(request, "User banned!")
+                user.save()
+                messages.success(request, "User account deactivated!")
+
 
     return render(request, "main/home.html",  {"posts": Post.objects.all(),  "request": request})
  
@@ -115,5 +118,5 @@ def custom_logout_view(request):
     return redirect('/login')  
 
 
-# News Api=======================================================
+
 
