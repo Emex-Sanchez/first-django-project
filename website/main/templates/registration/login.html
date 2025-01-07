@@ -1,16 +1,8 @@
-{% extends "main/base.html" %}
-{% block title %} Login Here {% endblock %}
-{% load crispy_forms_tags %}
-{% block content %}
-<form method="post" class="space-y-4">
-  {% csrf_token %}
-  {{ form|crispy }}
-  <p class="text-sm text-gray-600">
-    Don't have an account? Create one 
-    <a href="/sign-up" class="text-blue-500 hover:underline">here</a>
-  </p>
-  <button type="submit" class="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded">
-    Login
-  </button>
+{% extends "main/base.html" %} {% block title %} Login Here {% endblock %}
+{%load crispy_forms_tags %} {% block content %}
+<form method="post" class="from-group">
+  {% csrf_token %} {{form|crispy}}
+  <p>Don't have an accoount? Create one <a href="/sign-up">here</a></p>
+  <button type="submit" class="btn btn-success">Login</button>
 </form>
 {% endblock %}
